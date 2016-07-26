@@ -6,6 +6,8 @@ Based on the [modrzew/pokeminer](https://github.com/modrzew/pokeminer).
 
 Sending you a Discord Message for Pokémon you want.
 
+![Discord Message](static/preview.png)
+
 ### Config
 
 token: Discord Bot token
