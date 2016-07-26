@@ -33,6 +33,43 @@ npm install discord.js
 npm install request
 ```
 
+### Change stuff in pokeminer (web.py)
+
+Add the the web.py following: (after that you should see http://ip/discord a json output.)
+```python
+@app.route('/discord')
+def discord():
+    """Gets all the PokeMarkers via REST"""
+    return json.dumps(get_pokeDiscord())
+
+
+def get_pokeDiscord():
+    data = []
+
+    # Get the Pokemon out of the Database
+    session = db.Session()
+    pokemons = db.get_sightings(session)
+    session.close()
+
+    for pokemon in pokemons:
+        name = pokemon_names[str(pokemon.pokemon_id)]
+        datestr = datetime.fromtimestamp(pokemon.expire_timestamp)
+        dateoutput = datestr.strftime("%H:%M:%S")
+
+        data.append({
+            'type': 'pokemon',
+            'name': name,
+            'key': '{}-{}'.format(pokemon.pokemon_id, pokemon.spawn_id),
+            'disappear_time': pokemon.expire_timestamp,
+            'icon': 'static/icons/%d.png' % pokemon.pokemon_id,
+            'lat': pokemon.lat,
+            'lng': pokemon.lon,
+            'pokemon_id': pokemon.pokemon_id
+        })
+
+    return data		
+```
+
 ## Thanks to
 
 imDevinC https://github.com/ImDevinC/pkgo-discord for the functions
