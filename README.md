@@ -72,6 +72,9 @@ def get_pokeDiscord():
     return data		
 ```
 
+## Screen
+![Example](http://i.epvpimg.com/anHSaab.png)
+
 ## Thanks to
 
 imDevinC https://github.com/ImDevinC/pkgo-discord for the functions
